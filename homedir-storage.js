@@ -52,11 +52,6 @@ var HomedirStorage = module.exports = function(fsAdapter, resolution) {
         cacheMap[key] = value;
         return write(cb);
       });
-    },
-    remove: function(key) {
-      // todo: a quick queue system
-      delete cacheMap[key];
-      write(function() {})
     }
   }, {
     constructor: {

@@ -1,6 +1,6 @@
 # Mozu Multipass
 
-![](multipass.png)
+![](multipass.jpg)
 
 ```js
 var Multipass = require('mozu-multipass');

@@ -1,5 +1,4 @@
 var fs = require('fs');
-var assert = require('assert');
 var HomedirStorage = require('./homedir-storage');
 var generateCacheKey = require('./generate-cache-key');
 var isExpired = require('./is-ticket-expired');
