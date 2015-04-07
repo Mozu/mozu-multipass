@@ -25,6 +25,7 @@ function deSerialize(json) {
 }
 
 var Multipass = module.exports = function(storage) {
+  storage = storage || HomedirStorage(fs);
   return Object.create({
     get: function(claimType, context, callback) {
       var cacheKey;
@@ -52,7 +53,7 @@ var Multipass = module.exports = function(storage) {
     }
   }, {
     storage: {
-      value: storage || HomedirStorage(fs)
+      value: storage
     },
     constructor: {
       value: Multipass, // just for console logging obviousness
