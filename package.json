@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://tfs.corp.volusion.com:8080/tfs/VNext/Prototype/_git/mozu-multipass"
+    "url": "zetlen/mozu-multipass"
   },
   "keywords": [
     "mozu",
