@@ -34,3 +34,41 @@ multipass.set('admin-user', client.context, ticket, function(err) {
 
 });
 ```
+
+### Example Extension
+
+You can extend Multipass easily, using regular old JavaScript techniques, to add cool features. Here's one that uses [Inquirer](https://github.com/SBoudrias/inquirer) to prompt for a developer password when it's time to get a developer ticket.
+
+```js
+var Multipass = require('mozu-multipass');
+var inquirer = require('inquirer');
+function PromptingPass() {
+  var proto = Multipass();
+  var o = Object.create(proto);
+  o.get = function(claimtype, context, callback) {
+    return proto.get.call(this, claimtype, context, function(err, ticket) {
+      if (claimtype === "developer" && !ticket && !context.developerAccount.password) {
+        process.stdout.write('\u0007'); // ding!
+        inquirer.prompt([{
+          type: 'password',
+          name: 'password',
+          message: 'Developer password for ' + context.developerAccount.emailAddress + ':',
+          validate: function(str) {
+            return !!str;
+          }
+        }], function(answers) {
+          context.developerAccount.password = answers.password;
+          callback(null, null);
+        });
+      } else {
+        callback(null, ticket);
+      }
+    });
+  };
+  return o;
+};
+
+var promptingClient = require('mozu-node-sdk').client(null, {
+    authenticationStorage: PromptingPass()
+});
+```
