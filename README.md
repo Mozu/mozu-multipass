@@ -5,8 +5,7 @@
 ```js
 var Multipass = require('mozu-multipass');
 var MozuNodeSDK = require('mozu-node-sdk');
-var multipass = Multipass();
-var client = MozuNodeSDK.client(null, { authenticationStorage: multipass })
+var client = MozuNodeSDK.client(null, { plugins: [Multipass] })
 ```
 
 The above gives you a Mozu Node SDK client that stores all its authentication tickets persistently in your home directory. This speeds up access, helps you avoid storing plaintext passwords, and in the best of circumstances, will ask you for your password maximum once every twenty-four hours.
@@ -42,10 +41,10 @@ You can extend Multipass easily, using regular old JavaScript techniques, to add
 ```js
 var Multipass = require('mozu-multipass');
 var inquirer = require('inquirer');
-function PromptingPass() {
-  var proto = Multipass();
-  var o = Object.create(proto);
-  o.get = function(claimtype, context, callback) {
+function PromptingPass(client) {
+  var proto = Multipass(client);
+  var promptingPass = Object.create(proto);
+  promptingPass.get = function(claimtype, context, callback) {
     return proto.get.call(this, claimtype, context, function(err, ticket) {
       if (claimtype === "developer" && !ticket && !context.developerAccount.password) {
         process.stdout.write('\u0007'); // ding!
@@ -65,10 +64,10 @@ function PromptingPass() {
       }
     });
   };
-  return o;
+  return client.authenticationStorage = promptingPass;
 };
 
 var promptingClient = require('mozu-node-sdk').client(null, {
-    authenticationStorage: PromptingPass()
+  plugins: [PromptingPass]
 });
 ```
