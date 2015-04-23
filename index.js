@@ -24,7 +24,7 @@ function deSerialize(json) {
   });
 }
 
-var Multipass = module.exports = function(storage) {
+var Multipass = function Multipass(storage) {
   storage = storage || HomedirStorage(fs);
   return Object.create({
     get: function(claimType, context, callback) {
@@ -62,4 +62,8 @@ var Multipass = module.exports = function(storage) {
       configurable: false
     }
   });
+}
+
+module.exports = function(client, storage) {
+  client.authenticationStorage = Multipass(storage);
 }
