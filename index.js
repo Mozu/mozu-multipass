@@ -65,5 +65,5 @@ var Multipass = function Multipass(storage) {
 }
 
 module.exports = function(client, storage) {
-  client.authenticationStorage = Multipass(storage);
+  return client.authenticationStorage = Multipass(storage);
 }
