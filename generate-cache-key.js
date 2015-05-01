@@ -3,8 +3,8 @@ var delimiter = "|||";
 
 var contextSerializeStrategies = {
   'developer': function(context) {
-    assert(context.developerAccountId && context.developerAccount && context.developerAccount.emailAddress, "In order to retrieve a developer auth ticket, the provided context must have a developerAccountId and developerAccount.emailAddress.");
-    return ['developer',context.appKey,context.developerAccountId,context.developerAccount.emailAddress].join(delimiter);
+    assert(context.developerAccount && context.developerAccount.emailAddress, "In order to retrieve a developer auth ticket, the provided context must have a developerAccount.emailAddress.");
+    return ['developer',context.appKey,context.developerAccountId || 'all',context.developerAccount.emailAddress].join(delimiter);
   },
   'application': function(context) {
     return ['application',context.appKey].join(delimiter)
