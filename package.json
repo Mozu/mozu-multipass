@@ -23,5 +23,8 @@
   "devDependencies": {
     "mocha": "^2.2.1",
     "sinon": "^1.14.1"
+  },
+  "peerDependencies": {
+    "mozu-node-sdk": "^1.15.15052-hotfix12"
   }
 }
