@@ -16,7 +16,7 @@ var contextSerializeStrategies = {
 }
 
 var generateCacheKey = module.exports = function(claimType, context) {
-  assert(context.appKey, "In order to use Mozu Multipass, the provided context must have an appKey.");
+  console.log(claimType, context);
   assert(claimType in contextSerializeStrategies, "Unknown claim type " + claimType);
   return contextSerializeStrategies[claimType](context);
 }
