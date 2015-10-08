@@ -16,7 +16,6 @@ var contextSerializeStrategies = {
 }
 
 var generateCacheKey = module.exports = function(claimType, context) {
-  console.log(claimType, context);
   assert(claimType in contextSerializeStrategies, "Unknown claim type " + claimType);
   return contextSerializeStrategies[claimType](context);
 }
