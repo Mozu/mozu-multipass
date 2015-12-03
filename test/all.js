@@ -21,7 +21,7 @@ function MockStorage() {
       setImmediate(cb);
     })
   };
-  leeloo = Multipass(storage);
+  leeloo = Multipass({}, storage);
 }
 
 var mockfs;
@@ -35,6 +35,7 @@ function MockFS(opts) {
     }),
     writeFile: sinon.spy(function(filename, contents, encoding, callback) {
       mockfs.fileText = contents;
+      callback();
     })
   };
   return mockfs;
@@ -67,7 +68,7 @@ describe('Multipass', function() {
       leeloo.get('developer', {}, function(err, ticket) {
         assert(!ticket, "Ticket supplied when it should be undefined");
         assert(err instanceof Error, "No error supplied");
-        assert(err.message.match(/provided context must have an appKey/), "Error message not informative: " + err.message);
+        assert(err.message.match(/provided context must have/), "Error message not informative: " + err.message);
         done();
       });
     });
@@ -86,7 +87,7 @@ describe('Multipass', function() {
       leeloo.get('developer', { appKey: '123' }, function(err, ticket) {
         assert(!ticket, "Ticket supplied when it should be undefined");
         assert(err instanceof Error, "No error supplied");
-        assert(err.message.match(/provided context must have a developerAccountId/), "Error message not informative: " + err.message);
+        assert(err.message.match(/provided context must have a developer/), "Error message not informative: " + err.message);
         done();
       });
     });
@@ -248,11 +249,11 @@ describe('Multipass', function() {
   describe("interacts with the filesystem, ", function() {
 
     beforeEach(function() {
-      leeloo = Multipass(HomedirStorage(MockFS()));
+      leeloo = Multipass({}, HomedirStorage(MockFS()));
     })
 
     it("by saving to your homedir after some time", function(done) {
-
+      this.timeout(5000);
       var ticket = fakeTicket('dungbat');
       leeloo.set('developer', {
         appKey: '456',
