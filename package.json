@@ -1,6 +1,6 @@
 {
   "name": "mozu-multipass",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Local authentication ticket cache for the Mozu Node SDK, permitting the sharing of auth tickets between processes.",
   "main": "index.js",
   "scripts": {
