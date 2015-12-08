@@ -34,6 +34,13 @@ multipass.set('admin-user', client.context, ticket, function(err) {
 });
 ```
 
+#### Remove (optional extension)
+```js
+multipass.remove('admin-user', client.context, function(err) {
+
+});
+```
+
 ### Example Extension
 
 You can extend Multipass easily, using regular old JavaScript techniques, to add cool features. Here's one that uses [Inquirer](https://github.com/SBoudrias/inquirer) to prompt for a developer password when it's time to get a developer ticket.
