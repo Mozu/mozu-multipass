@@ -50,6 +50,15 @@ var Multipass = function Multipass(storage) {
         return callback(e);
       }
       storage.save(cacheKey, preSerialize(ticket), callback);
+    },
+    remove: function(claimType, context, callback) {
+      var cacheKey;
+      try {
+        cacheKey = generateCacheKey(claimType, context);
+      } catch(e) {
+        return callback(e);
+      }
+      storage.save(cacheKey, null, callback);
     }
   }, {
     storage: {

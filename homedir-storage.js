@@ -47,6 +47,7 @@ var HomedirStorage = module.exports = function(fsAdapter, resolution) {
       return read(function(res) {
         merge(cacheMap, res);
         cacheMap[key] = value;
+        if (!value) delete cacheMap[key];
         return write(cb);
       });
     }
