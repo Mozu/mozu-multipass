@@ -30,7 +30,7 @@ var HomedirStorage = module.exports = function(fsAdapter, resolution) {
 
   var write = debounce(function(callback) {
     stripExpired(cacheMap);
-    fsAdapter.writeFile(cacheFileName, JSON.stringify(cacheMap, null, 2), 'utf-8', callback)
+    fsAdapter.writeFile(cacheFileName, JSON.stringify(cacheMap, null, 2), 'utf-8', function(e) { callback(null); /* it doesn't matter whether this succeeds */ });
   }, 400);
 
   return Object.create({
