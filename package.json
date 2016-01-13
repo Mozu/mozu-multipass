@@ -9,7 +9,8 @@
     "ci-build-stable": "npm run ci-build",
     "postci-build-stable": "mozu-validate-npm-package",
     "cov": "istanbul cover _mocha",
-    "test": "mocha"
+    "test": "mocha",
+    "prepublish": "mozu-npm-publish-check"
   },
   "repository": {
     "type": "git",
@@ -21,13 +22,13 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "lodash.debounce": "^3.0.3",
-    "lodash.merge": "^3.1.0"
+    "lodash.debounce": "^3.1.1",
+    "lodash.merge": "^3.3.2"
   },
   "devDependencies": {
     "istanbul": "^0.4.2",
-    "mocha": "^2.2.1",
-    "mozu-validate-npm-package": "^1.1.0",
-    "sinon": "^1.14.1"
+    "mocha": "^2.3.4",
+    "mozu-validate-npm-package": "^1.2.1",
+    "sinon": "^1.17.2"
   }
 }
