@@ -1,27 +1,33 @@
 {
   "name": "mozu-multipass",
   "version": "0.3.0",
+  "author": "Volusion, LLC",
   "description": "Local authentication ticket cache for the Mozu Node SDK, permitting the sharing of auth tickets between processes.",
   "main": "index.js",
   "scripts": {
+    "ci-build": "npm test",
+    "ci-build-stable": "npm run ci-build",
+    "postci-build-stable": "mozu-validate-npm-package",
+    "cov": "istanbul cover _mocha",
     "test": "mocha"
   },
   "repository": {
     "type": "git",
-    "url": "zetlen/mozu-multipass"
+    "url": "https://github.com/Mozu/mozu-multipass"
   },
   "keywords": [
     "mozu",
     "mozu-node-sdk"
   ],
-  "author": "James Zetlen",
   "license": "MIT",
   "dependencies": {
     "lodash.debounce": "^3.0.3",
     "lodash.merge": "^3.1.0"
   },
   "devDependencies": {
+    "istanbul": "^0.4.2",
     "mocha": "^2.2.1",
+    "mozu-validate-npm-package": "^1.1.0",
     "sinon": "^1.14.1"
   }
 }
